@@ -77,4 +77,5 @@ body {
 }
 #lib{
     width: 550px; height: 550px;
+    z-index: 0;
 }
