@@ -8,7 +8,7 @@ body {
     background-color: black;
 }
 #등판{
-    width: 430px; height: 300px;
+    width: 365px; height: 300px;
     background-color:rgb(232, 200, 159);
     border-radius: 10px;
     position: fixed;
@@ -16,7 +16,7 @@ body {
     z-index: 1;
 }
 #밑단{
-    width: 450px; height: 30px;
+    width: 384px; height: 30px;
     background-color:rgb(206, 177, 139);
     border-radius: 10px;
     position: fixed;
@@ -32,7 +32,7 @@ body {
     z-index: 6;
 }
 #책커버{
-    width: 400px; height: 350px;
+    width: 340px; height: 350px;
     background-color:darkcyan;
     border-radius: 4px;
     position: fixed;
@@ -40,7 +40,7 @@ body {
     z-index: 4;
 }
 #종이{
-    width: 380px; height: 350px;
+    width: 320px; height: 350px;
     background-color:ghostwhite;
     border-radius: 4px;
     position: fixed;
@@ -52,29 +52,29 @@ body {
     top:210px;
     left:55px;
     z-index:7;
-    font-size: 30px;
-    width:170px;
+    font-size: 28px;
+    width:140px;
 }
 #textArea2{
     position: fixed;
     top:210px;
-    left:245px;
+    left:210px;
     z-index:7;
-    font-size: 30px;
-    width:170px;
+    font-size: 28px;
+    width:140px;
 }
 #음영{
     width: 10px; height: 350px;
     background-color:darkgray;
     position: fixed;
-    top:200px; left: 410px;
+    top:200px; left: 350px;
     z-index: 6;
 }
 #선{
     width: 3px; height: 350px;
     background-color:black;
     position: fixed;
-    top:200px; left: 230px;
+    top:200px; left: 200px;
     z-index: 6;
 }
 #윗면{
