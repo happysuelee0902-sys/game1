@@ -75,3 +75,6 @@ body {
     top:620px; left: 0px;
     z-index: 0;
 }
+#lib{
+    width: 550px; height: 550px;
+}
