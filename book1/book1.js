@@ -104,8 +104,8 @@ function startCountdown(callback) {
 }
 
 let timerInterval;
-let timeLeft = 50;
-let totalTime = 50;
+let timeLeft = 30;
+let totalTime = 30;
 
 function startTimer(seconds) {
     timeLeft = seconds;
@@ -184,7 +184,7 @@ function showResult(mode){
   btn.disabled = true;
 
   const titleEl = document.querySelector('#winOverlay h2');
-  titleEl.textContent= (mode==='win')? '이겼다!': '아쉽네..';
+  titleEl.textContent= (mode==='win')? '쉽네ㅋ': '오늘따라 집중이..';
 
   winOverlay.classList.remove('hidden');
 }
