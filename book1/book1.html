@@ -14,8 +14,18 @@
     <button id = "button" type="button">읽기</button>
     <div id = "timebar"></div>
     <div id = "time"></div>
-    <div id = "pause">⏸️</div>
-    <div id = "home">↩️</div>
+    <div id = "home">
+        <a href="../context/context.html">↩️</a>
+    </div>
+    <div id = "winOverlay" class = "hidden">
+        <div class = "win-box">
+            <h2>이겼다!</h2>
+            <div class = "btns">
+                <button id = "retryBtn">다시</button>
+                <a id = "homeBtn" href = "../context/context.html">홈으로</a>
+            </div>
+        </div>
+    </div>
     <div class= "독서대">
         <div id = "철사1"></div>
         <div id = "철사2"></div>
@@ -35,6 +45,9 @@
         <div id = "textArea2">의 박소소리는 컸고 간혹 '브라보!'하는 고함소리가 들려왔으나 커튼콜은 없었다.환호는 순식간에 사그라졌고,관객들은 주</div>
     </div>
     <div id ="bug" class="hidden">🐞</div>
+    <div id ="countdown" class="hidden">
+        <span id = "countText">3</span>
+    </div>
     <script type="module" src="./book1.js"></script>
 </body>
 
