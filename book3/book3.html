@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="./book3.css">
     <title>책 빨리 읽기
     </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,6 +19,15 @@
     <div id = "time"></div>
     <div id = "home">
         <a href="../context/context.html">↩️</a>
+    </div>
+    <div id = "winOverlay" class = "hidden">
+        <div class = "win-box">
+            <h2>쉽네ㅋ</h2>
+            <div class = "btns">
+                <button id = "retryBtn">다시</button>
+                <a id = "homeBtn" href = "../context/context.html">홈으로</a>
+            </div>
+        </div>
     </div>
     <div class= "독서대">
         <div id = "철사1"></div>
@@ -36,6 +48,10 @@
         <div id = "textArea2">공으로 특정하여 묘사되고 있다.앨턴은 젊은 학자들이 '적절한 견습과정'을 거처야 한다고 거듭 말한다.이들은 '자신의 생활이 기술을 배우는 견습생의 생활'이고 '직업에 맞게 스스로를 훈련할'필요가 있으며 따라서 '가르침과 지도와 훈련'을 받을 필요가 있음을 받아들여야 한다는 것이다. 여기서 주목해</div>
     </div>
     <div id ="bug" class="hidden">🐞</div>
+    <div id ="phone">📱</div>
+    <div id ="countdown" class="hidden">
+        <span id = "countText">3</span>
+    </div>
     <script type="module" src="./book3.js"></script>
 </body>
 

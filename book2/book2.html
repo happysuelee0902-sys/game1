@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="./book2.css">
     <title>책 빨리 읽기
     </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -14,9 +17,17 @@
     <button id = "button" type="button">읽기</button>
     <div id = "timebar"></div>
     <div id = "time"></div>
-    <div id = "pause">⏸️</div>
     <div id = "home">
         <a href="../context/context.html">↩️</a>
+    </div>
+    <div id = "winOverlay" class = "hidden">
+        <div class = "win-box">
+            <h2>쉽네ㅋ</h2>
+            <div class = "btns">
+                <button id = "retryBtn">다시</button>
+                <a id = "homeBtn" href = "../context/context.html">홈으로</a>
+            </div>
+        </div>
     </div>
     <div class= "독서대">
         <div id = "철사1"></div>
@@ -36,7 +47,10 @@
         <div id = "textArea1">1876년,44세 마네는 성병인 임질에 걸리고 맙니다.의사가 관절염으로 오진하는 바람에 병세가 계속 악화되었죠.다리부터 시작된 마비증상은 온옴으로 퍼졌고,마네는 결국 51세의 나이로 사망합니다.'풀 밭위의 점심 식사'와'올랭피아'로 당시 매춘</div>
         <div id = "textArea2">이 횡행하던 세태를 그린 마네, 어쩌면 자신의 일상을 반영했던 것 아닐까?라는 생각도 드네요. 심각한 근육통과 마비 증세로 심신이 모두 피폐해진 마네는 사망하기 1년전, 그림 하나를 완성합니다. 그것은 마네의 '마지막 수수께기'를 담은 최후의</div>
     </div>
-    <div id ="bug" class="hidden">🐞</div>
+    <div id ="bug" class="hidden">🐛</div>
+    <div id ="countdown" class="hidden">
+        <span id = "countText">3</span>
+    </div>
     <script type="module" src="./book2.js"></script>
 </body>
 

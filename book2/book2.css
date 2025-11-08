@@ -125,8 +125,9 @@ button{
 #bug{
     position: fixed;
     font-size: 60px;
-    top:100px;
-    transform: rotate(12deg);
+    top:550px;
+    right:30px;
+    transform: rotate(-50deg);
     z-index: 6;
     
 }
@@ -142,4 +143,81 @@ button{
     left:25px;  
     z-index: 6;
     cursor: pointer;
+}
+#countdown{
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0,0,0,.35);
+    z-index: 10000;
+    pointer-events: auto;
+}
+#countdown.hidden { display: none; }
+#countText{
+    font-family: "Gasoek One";
+    font-size: 130px;
+    color: #fff;
+    text-shadow:
+    2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
+    2px 2px #000, -2px 2px #000, 2px -2px #000, -2px -2px #000;
+    animation: pop 1s;
+
+}
+@keyframes pop {
+    0%   { opacity: 0; transform: scale(.8) translateY(8px); }
+    60%  { opacity: 1; transform: scale(1.1) translateY(-2px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  #winOverlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+}
+
+.win-box{
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.win-box h2{
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-family: "Gasoek One", sans-serif;
+}
+
+.btns{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btns button,
+.btns a{
+    padding: 15px 30px;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background-color: deeppink;
+    color: white;
+    font-family: "Gasoek One", sans-serif;
+}
+
+.btns a{
+    background-color: deepskyblue;
+    text-shadow:
+    2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
+    2px 2px #000, -2px 2px #000, 2px -2px #000, -2px -2px #000;
+}
+
+#winOverlay.hidden{
+    display: none;
 }

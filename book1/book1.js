@@ -136,7 +136,7 @@ function stopTimer() {
 function startGame() {
   // 게임 시작 시 버튼 활성화
   btn.disabled = false;
-  startTimer(50);
+  startTimer(30);
   if (bugInterval) {
     clearInterval(bugInterval);
 }
