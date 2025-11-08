@@ -53,18 +53,18 @@ body {
 }
 #textArea1{
     position: fixed;
-    top:200px;
+    top:210px;
     left:55px;
     z-index:7;
-    font-size: 28px;
+    font-size: 26px;
     width:140px;
 }
 #textArea2{
     position: fixed;
-    top:200px;
+    top:210px;
     left:210px;
     z-index:7;
-    font-size: 28px;
+    font-size: 26px;
     width:140px;
 }
 #음영{
