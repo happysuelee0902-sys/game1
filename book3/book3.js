@@ -4,6 +4,7 @@ const timeFill = document.querySelector('#time');
 const time = document.querySelector('#time');
 
 const bug = document.querySelector('#bug');
+const phone = document.querySelector('#phone');
 
 const winOverlay = document.querySelector('#winOverlay');
 const retryBtn = document.querySelector('#retryBtn');
@@ -21,9 +22,24 @@ for ( let i = 0; i < texts.length; i++){
     originals[i]= texts[i].textContent; // 원본 저장 (백업용)
 }
 let bugActive = false;
+let phoneActive  = false;
 
+let phoneInterval  = null;
 let bugInterval;
 let bugPosition = 30;
+
+function updateInterlock(){
+    const anyActive = bugActive || phoneActive || !countdownEl.classList.contains('hidden');
+    btn.disabled = anyActive;
+    // 텍스트 흐림도 통일
+    if (anyActive){
+      text1.classList.add('blurred');
+      text2.classList.add('blurred');
+    }else{
+      text1.classList.remove('blurred');
+      text2.classList.remove('blurred');
+    }
+  }
 
 function allEmpty(){
     for( let i = 0; i < texts.length; i++){
@@ -77,7 +93,23 @@ function killBug(){
 }
 bug.addEventListener('click', killBug);
 
-
+function spawnPhone(){
+    if (phoneActive || !countdownEl.classList.contains('hidden')) return;
+    phoneActive = true;
+  
+   
+    phone.classList.add('ring');  // 진동
+    updateInterlock();
+  }
+  function killPhone(){
+    if (!phoneActive) return;
+    phoneActive = false;
+  
+    phone.classList.remove('ring');
+   
+    updateInterlock();
+  }
+  phone.addEventListener('click', killPhone);
 
 
 
@@ -143,12 +175,20 @@ function startGame() {
   bugPosition = 30;
   bug.style.right = bugPosition + 'px';
 
+
+  bugActive = phoneActive = false;
+  bug.classList.add('hidden');
+  phone.classList.remove('ring');
+  updateInterlock();
+
   if (bugInterval) {
     clearInterval(bugInterval);
+    if (phoneInterval)  clearInterval(phoneInterval);
 }
   
  
   bugInterval = setInterval(spawnBug, 10000);
+  phoneInterval  = setInterval(spawnPhone, 15000); 
 }
 
 function showWin(){
@@ -160,6 +200,8 @@ function showWin(){
   btn.disabled = true;
   winOverlay.classList.remove('hidden');
 }
+
+
 retryBtn.addEventListener('click',()=>{
   for (let i =0; i < texts.length; i++)texts[i].textContent = originals[i]; // 글 복구
   
@@ -167,7 +209,7 @@ retryBtn.addEventListener('click',()=>{
   winOverlay.classList.add('hidden'); 
 
   startCountdown(()=>{
-    startTimer(45);
+    startTimer(70);
     restartBugs();
     bugActive = false;
     bug.classList.add('hidden');
@@ -181,11 +223,15 @@ retryBtn.addEventListener('click',()=>{
     });
   });
 });
+
+
 function restartBugs(){
     if (bugInterval) {
         clearInterval(bugInterval);
     }
+    if (phoneInterval)  clearInterval(phoneInterval);
     bugInterval = setInterval(spawnBug,10000);
+    phoneInterval  = setInterval(spawnPhone, 20000);
 }
 btn.disabled = true;
 startCountdown(() => {

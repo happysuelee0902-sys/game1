@@ -3,7 +3,7 @@ const timeBar= document.querySelector('#timebar');
 const timeFill = document.querySelector('#time');
 const time = document.querySelector('#time');
 
-const bug = document.querySelector('#bug');
+
 const phone = document.querySelector('#phone');
 const person = document.querySelector('#person');
 
@@ -22,7 +22,7 @@ const originals = [];
 for ( let i = 0; i < texts.length; i++){
     originals[i]= texts[i].textContent; // 원본 저장 (백업용)
 }
-let bugActive = false;
+
 let personActive = false;
 let phoneActive  = false;
 
@@ -30,11 +30,10 @@ let phoneActive  = false;
 let personInterval = null;
 let phoneInterval  = null;
 
-let bugInterval;
-let bugPosition = 30;
+
 
 function updateInterlock(){
-    const anyActive = bugActive || personActive || phoneActive || !countdownEl.classList.contains('hidden');
+    const anyActive = personActive || phoneActive || !countdownEl.classList.contains('hidden');
     btn.disabled = anyActive;
     // 텍스트 흐림도 통일
     if (anyActive){
@@ -71,33 +70,6 @@ btn.addEventListener('click', deleteOne);
 
 
 
-function spawnBug(){
-    if(bugActive) return;
-    bugActive = true;
-
-    text1.classList.add('blurred');
-    text2.classList.add('blurred');
-
-    bug.classList.remove('hidden');
-    bugPosition += 50; 
-    bug.style.right = bugPosition + 'px';
-
-    btn.disabled = true;
-
-}
-
-function killBug(){
-    bugActive = false;
-
-    text1.classList.remove('blurred');
-    text2.classList.remove('blurred');
-
-    btn.disabled = false;
-
-    bug.classList.add('hidden');
-
-}
-bug.addEventListener('click', killBug);
 
 
 function spawnPerson(){
@@ -160,8 +132,8 @@ function startCountdown(callback) {
 }
 
 let timerInterval;
-let timeLeft = 90;
-let totalTime = 90;
+let timeLeft = 100;
+let totalTime = 100;
 
 function startTimer(seconds) {
     timeLeft = seconds;
@@ -193,25 +165,19 @@ function startGame() {
   btn.disabled = false;
   startTimer(90);
 
-  bugPosition = 30;
-  bug.style.right = bugPosition + 'px';
+  personActive = phoneActive = false;
 
-  bugActive = personActive = phoneActive = false;
-  bug.classList.add('hidden');
   person.classList.add('hidden');
   phone.classList.remove('ring');
   updateInterlock();
 
-  if (bugInterval) {
-    clearInterval(bugInterval);
-    if (personInterval) clearInterval(personInterval);
-    if (phoneInterval)  clearInterval(phoneInterval);
-}
+  if (personInterval) clearInterval(personInterval);
+  if (phoneInterval)  clearInterval(phoneInterval);
   
  
-  bugInterval = setInterval(spawnBug, 10000);
+  
   personInterval = setInterval(spawnPerson, 15000); 
-  phoneInterval  = setInterval(spawnPhone,   8000); 
+  phoneInterval  = setInterval(spawnPhone, 10000); 
 }
 
 function showWin(){

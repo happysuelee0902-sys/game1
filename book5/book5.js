@@ -160,8 +160,8 @@ function startCountdown(callback) {
 }
 
 let timerInterval;
-let timeLeft = 120;
-let totalTime = 120;
+let timeLeft = 140;
+let totalTime = 140;
 
 function startTimer(seconds) {
     timeLeft = seconds;
