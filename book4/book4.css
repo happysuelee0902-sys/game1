@@ -53,7 +53,7 @@ body {
     top:210px;
     left:55px;
     z-index:7;
-    font-size: 13px;
+    font-size: 15px;
     width:140px;
 }
 #textArea2{
@@ -61,7 +61,7 @@ body {
     top:210px;
     left:210px;
     z-index:7;
-    font-size: 13px;
+    font-size: 15px;
     width:140px;
 }
 #음영{
@@ -93,7 +93,7 @@ body {
     z-index: 0;
 }
 #lib{
-    width: 550px; height: 550px;
+    width: 570px; height: 550px;
     z-index: 0;
 }
 button{

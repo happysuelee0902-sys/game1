@@ -245,6 +245,11 @@ function showResult(mode){
   stopTimer();
   if(bugInterval)clearInterval(bugInterval);
   btn.disabled = true;
+  if (phoneInterval)  clearInterval(phoneInterval);
+
+  bugActive= phoneActive = false;
+  phone.classList.remove('ring'); 
+  updateInterlock();
 
   const titleEl = document.querySelector('#winOverlay h2');
   titleEl.textContent= (mode==='win')? '쉽네ㅋ': '오늘따라 집중이..';

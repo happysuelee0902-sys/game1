@@ -230,11 +230,11 @@ function onTimeUp(){
 
 function showResult(mode){
   stopTimer();
-  if(bugInterval)clearInterval(bugInterval);
+  
   if (personInterval) clearInterval(personInterval);
   if (phoneInterval)  clearInterval(phoneInterval);
 
-  bugActive = personActive = phoneActive = false;
+  personActive = phoneActive = false;
   phone.classList.remove('ring'); 
   updateInterlock();
 
