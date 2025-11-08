@@ -1,0 +1,279 @@
+const btn = document.querySelector('#button');
+const timeBar= document.querySelector('#timebar');
+const timeFill = document.querySelector('#time');
+const time = document.querySelector('#time');
+
+const bug = document.querySelector('#bug');
+const phone = document.querySelector('#phone');
+const person = document.querySelector('#person');
+
+const winOverlay = document.querySelector('#winOverlay');
+const retryBtn = document.querySelector('#retryBtn');
+const homeBtn = document.querySelector('#homeBtn');
+
+const countdownEl = document.querySelector('#countdown');
+const countText = document.querySelector('#countText');
+
+const text1= document.querySelector('#textArea1');
+const text2 = document.querySelector('#textArea2');
+const texts = document.querySelectorAll('#textArea1,#textArea2');
+
+const originals = [];
+for ( let i = 0; i < texts.length; i++){
+    originals[i]= texts[i].textContent; // 원본 저장 (백업용)
+}
+let bugActive = false;
+let personActive = false;
+let phoneActive  = false;
+
+// 인터벌
+let personInterval = null;
+let phoneInterval  = null;
+
+let bugInterval;
+let bugPosition = 30;
+
+function updateInterlock(){
+    const anyActive = bugActive || personActive || phoneActive || !countdownEl.classList.contains('hidden');
+    btn.disabled = anyActive;
+    // 텍스트 흐림도 통일
+    if (anyActive){
+      text1.classList.add('blurred');
+      text2.classList.add('blurred');
+    }else{
+      text1.classList.remove('blurred');
+      text2.classList.remove('blurred');
+    }
+  }
+
+  
+function allEmpty(){
+    for( let i = 0; i < texts.length; i++){
+        if(texts[i].textContent.length >0) return false; // 하나라도 내용이 있으면 false
+    }
+    return true;
+}
+function deleteOne() {
+if (winOverlay && !winOverlay.classList.contains('hidden')) return; // 이미 승리상태면 무시해
+
+if (!countdownEl.classList.contains('hidden')) return;
+  for (let i = 0; i < texts.length; i++) { 
+    const currentText= texts[i].textContent;
+    if (currentText.length > 0) {
+      texts[i].textContent = currentText.slice(1);
+      break;
+    }
+  }
+  if (allEmpty()) showResult('win');
+}
+btn.addEventListener('click', deleteOne);
+
+
+
+
+function spawnBug(){
+    if(bugActive) return;
+    bugActive = true;
+
+    text1.classList.add('blurred');
+    text2.classList.add('blurred');
+
+    bug.classList.remove('hidden');
+    bugPosition += 50; 
+    bug.style.right = bugPosition + 'px';
+
+    btn.disabled = true;
+
+}
+
+function killBug(){
+    bugActive = false;
+
+    text1.classList.remove('blurred');
+    text2.classList.remove('blurred');
+
+    btn.disabled = false;
+
+    bug.classList.add('hidden');
+
+}
+bug.addEventListener('click', killBug);
+
+
+function spawnPerson(){
+    if (personActive || !countdownEl.classList.contains('hidden')) return;
+    personActive = true;
+  
+    person.classList.remove('hidden');
+    updateInterlock();
+  }
+  function killPerson(){
+    if (!personActive) return;
+    personActive = false;
+    person.classList.add('hidden');
+    updateInterlock();
+  }
+  person.addEventListener('click', killPerson);
+  
+  function spawnPhone(){
+    if (phoneActive || !countdownEl.classList.contains('hidden')) return;
+    phoneActive = true;
+  
+   
+    phone.classList.add('ring');  // 진동
+    updateInterlock();
+  }
+  function killPhone(){
+    if (!phoneActive) return;
+    phoneActive = false;
+  
+    phone.classList.remove('ring');
+   
+    updateInterlock();
+  }
+  phone.addEventListener('click', killPhone);
+  
+
+function startCountdown(callback) {
+  const seq = ['3','2','1','start'];
+  let i = 0;
+  countdownEl.classList.remove('hidden'); // 카운트다운 보이게
+  countdownEl.style.pointerEvents = 'auto';
+  countText.textContent = seq[i];
+
+  (function next(){
+      const delay = 1000; 
+      setTimeout(() => {
+          i++;
+          if (i < seq.length) {
+              countText.textContent = seq[i];
+              next();
+          } else {
+              setTimeout(() => { 
+                  countdownEl.classList.add('hidden'); // 숨기기
+                  countdownEl.style.pointerEvents = 'none';
+                  if (callback) callback();
+              }, 500);
+          }
+      }, delay);
+  })();
+}
+
+let timerInterval;
+let timeLeft = 120;
+let totalTime = 120;
+
+function startTimer(seconds) {
+    timeLeft = seconds;
+    totalTime = seconds;
+    timeFill.style.width = '100%';
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        const percent = (timeLeft / totalTime) * 100;
+        timeFill.style.width = percent + '%';
+        
+        if (timeLeft <= 0) {
+            stopTimer();
+            showResult('lose');
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+
+function startGame() {
+
+  btn.disabled = false;
+  startTimer(120);
+
+  bugPosition = 30;
+  bug.style.right = bugPosition + 'px';
+
+  bugActive = personActive = phoneActive = false;
+  bug.classList.add('hidden');
+  person.classList.add('hidden');
+  phone.classList.remove('ring');
+  updateInterlock();
+
+  if (bugInterval) {
+    clearInterval(bugInterval);
+    if (personInterval) clearInterval(personInterval);
+    if (phoneInterval)  clearInterval(phoneInterval);
+}
+  
+ 
+  bugInterval = setInterval(spawnBug, 10000);
+  personInterval = setInterval(spawnPerson, 15000); 
+  phoneInterval  = setInterval(spawnPhone,   8000); 
+}
+
+function showWin(){
+  stopTimer();
+  if (bugInterval) {
+    clearInterval(bugInterval);
+}
+
+  btn.disabled = true;
+  winOverlay.classList.remove('hidden');
+}
+retryBtn.addEventListener('click',()=>{
+  for (let i =0; i < texts.length; i++)texts[i].textContent = originals[i]; // 글 복구
+  
+  btn.disabled = false;
+  winOverlay.classList.add('hidden'); 
+
+  startCountdown(()=>{
+    startTimer(120);
+    restartBugs();
+    bugActive = false;
+    bug.classList.add('hidden');
+    bugPosition = 30;
+    bug.style.right = bugPosition + 'px';
+    text1.classList.remove('blurred');
+    text2.classList.remove('blurred');
+
+    startCountdown(()=>{
+        startGame();
+    });
+  });
+});
+function restartBugs(){
+    if (bugInterval) {
+        clearInterval(bugInterval);
+    }
+    if (personInterval) clearInterval(personInterval);
+    if (phoneInterval)  clearInterval(phoneInterval);
+    bugInterval = setInterval(spawnBug,10000);
+    personInterval = setInterval(spawnPerson, 15000);
+  phoneInterval  = setInterval(spawnPhone,   8000);
+}
+btn.disabled = true;
+startCountdown(() => {
+  startGame();
+});
+function onTimeUp(){
+  showResult('lose');
+}
+
+function showResult(mode){
+  stopTimer();
+  if(bugInterval)clearInterval(bugInterval);
+  if (personInterval) clearInterval(personInterval);
+  if (phoneInterval)  clearInterval(phoneInterval);
+
+  bugActive = personActive = phoneActive = false;
+  phone.classList.remove('ring'); 
+  updateInterlock();
+
+  const titleEl = document.querySelector('#winOverlay h2');
+  titleEl.textContent= (mode==='win')? '쉽네ㅋ': '오늘따라 집중이..';
+
+  winOverlay.classList.remove('hidden');
+}

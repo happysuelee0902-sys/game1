@@ -107,8 +107,8 @@ function startCountdown(callback) {
 }
 
 let timerInterval;
-let timeLeft = 45;
-let totalTime = 45;
+let timeLeft = 70;
+let totalTime = 70;
 
 function startTimer(seconds) {
     timeLeft = seconds;
@@ -138,7 +138,7 @@ function stopTimer() {
 function startGame() {
 
   btn.disabled = false;
-  startTimer(50);
+  startTimer(70);
 
   bugPosition = 30;
   bug.style.right = bugPosition + 'px';

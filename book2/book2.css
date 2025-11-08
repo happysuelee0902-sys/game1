@@ -7,7 +7,11 @@ body {
     height: 100%;
     background-color: black;
 }
-
+html{
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
 #등판{
     width: 365px; height: 300px;
     background-color:rgb(232, 200, 159);
@@ -47,9 +51,12 @@ body {
     position: fixed;
     top:200px; left: 40px;
     z-index: 5;
+    box-sizing: border-box;
+    padding: 16px 18px;    /* 텍스트 여백 */
+    overflow: hidden; 
 }
 #textArea1{
-    position: fixed;
+    position: absolute;
     top:210px;
     left:55px;
     z-index:7;
