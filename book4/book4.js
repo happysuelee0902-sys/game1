@@ -243,3 +243,10 @@ function showResult(mode){
 
   winOverlay.classList.remove('hidden');
 }
+['#종이', '#textArea1', '#textArea2', '#책커버', '#음영', '#선'].forEach(sel=>{
+    const el = document.querySelector(sel);
+    if(!el) return;
+    // 터치/클릭 모두 차단
+    el.addEventListener('touchstart', e=>{ e.preventDefault(); e.stopPropagation(); }, {passive:false});
+    el.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); });
+  });
