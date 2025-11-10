@@ -250,3 +250,6 @@ button{
 .hidden{
     display:none;
 }
+button {
+    touch-action: manipulation; /* 더블탭 확대 방지 */
+  }
